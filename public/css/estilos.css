@@ -1,0 +1,12 @@
+.par {
+    background-color: rgba(235, 235, 235, 0.959);
+}
+
+.impar {
+    background-color: rgb(240, 240, 240);
+}
+
+img {
+    width: 300px;
+    height: 200px;
+}

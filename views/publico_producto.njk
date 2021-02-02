@@ -1,0 +1,45 @@
+{% extends "publico_base.njk" %}
+
+{% block titulo %}Productos | Producto{% endblock %}
+
+{% block contenido %}
+    {% if producto %}
+        <h1> {{ producto.nombre }}</h1>
+        <li> <strong> Descripción: </strong> {{ producto.descripcion }}</li>
+        <li> <strong> Precio: </strong> {{ producto.precio }} €</li>
+        <img src="/public/uploads/{{ producto.imagen }}"> 
+        <p><strong> Comentarios: </strong> </p>
+            <ul>
+            {% for comentario in producto.comentarios %}
+                <p style="display:inline"> <strong>{{ comentario.nombreUsuario }}: </strong> </br>
+                {{ comentario.comentario }}
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <form action="/comentarios/{{ producto.id }}/{{ comentario.id }}" method="post" >
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button type="submit" class="btn btn-danger"> Borrar</button>
+                    </form>
+                </div> </p>
+                <hr>
+            {% endfor %}
+            </ul>                                
+    {% endif %}
+
+<form action="/comentarios/{{producto.id}}" method="post" >
+    <div class="form-group">
+        <label for="comentarios"><strong><h3> Comentarios:</h3></strong></label>
+        <div class="form-group">
+            <label for="nombreUsuario">Nombre de Usuario:</label>
+            <input type="text" class="form-control" name="nombreUsuario"
+                placeholder="Nombre del Usuario..."/> 
+
+            <label for="comentario">Comentario:</label>
+            <textarea class="form-control"  name="comentario" 
+            placeholder="Añade un comentario..." rows="3"></textarea>
+        </div>
+
+        <div class="form-group d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-primary">Enviar </button>
+        </div>
+    </div>
+</from>
+{% endblock %}

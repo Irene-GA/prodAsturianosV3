@@ -1,0 +1,61 @@
+{% extends "admin_base.njk" %}
+
+{% block titulo %} Productos | Listado {% endblock %}
+
+{% block contenido %}
+    <h1>Listado de Productos</h1>
+    <div>
+        {# <ul> #}
+        <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Ver Producto</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Borrar</th>
+        </tr>
+      </thead>
+    {% for producto in productos %}
+        {% if loop.index % 2 == 0 %}
+            <tr class="par">
+        {% else %}
+            <tr class="impar">
+        {% endif %}
+        <tbody>
+            <td> {{ producto.nombre }} </td>
+            <td><a href="/producto/{{ producto.id }}" class="btn btn-success"></a></td>
+            <td><a class="btn btn-primary" href="/admin/productos/editar/{{ producto.id }}"> </a> </td>
+            <td>
+                <form action="/admin/productos/{{ producto.id }}" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="submit" class="btn btn-danger"> </button>
+                </form>
+            </td>
+          
+        </tr>
+    {% endfor %}
+    </tbody>
+    </div>
+{% endblock %}
+      {# <li> {{ producto.nombre }}
+        <a href="/producto/{{ producto.id }}" class="btn btn-success"> Ver ficha </a>
+      </li> 
+    {% endfor %}
+    </table>
+        {% for producto in productos %}
+            {% if loop.index % 2 == 0 %}
+                <li class="par">
+            {% else %}
+                <li class="impar">
+            {% endif %}
+            <strong> {{ producto.nombre }} </strong>
+            <form action="/admin/productos/{{ producto.id }}" method="post">
+                <a class="btn btn-success" href="/producto/{{ producto.id }}"> Ver Producto </a>
+                <a class="btn btn-primary" href="/admin/productos/editar/{{ producto.id }}"> Editar </a>
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit" class="btn btn-danger"> Borrar </button>
+            </form> </li>
+        {% else %}
+            <p>No hay libros que mostrar.</p>
+        {% endfor %}
+        </ul>#}

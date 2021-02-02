@@ -1,0 +1,49 @@
+{% extends "publico_base.njk" %}
+
+{% block titulo %}Productos | Índice{% endblock %}
+
+{% block contenido %}
+
+  <!-- Another variation with a button -->
+    <nav class="navbar navbar-light bg-light justify-content-between">
+    
+    <form class="navbar-form navbar-right form-inline" action="/buscar" method="post">
+        <input class="form-control mr-sm-2" type="text" name="buscarProd" placeholder="Buscar productos"> 
+      <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button> 
+    </form>
+  </nav>
+  
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Ver Producto</th>
+        </tr>
+      </thead>
+  {% if buscarProd != '' %}
+    {% for prod in producto %}
+      <tbody>
+        <tr>
+          <td> {{ prod.nombre }} </td>
+          <td> </td>
+          <td><a href="/producto/{{ prod.id }}" class="btn btn-success"></a></td>
+        </tr>
+      </tbody>
+    {% endfor %}
+  {% else %}
+  <tbody>
+        <tr>
+          <td> {{ prod.nombre }} </td>
+          <td> </td>
+          <td><a href="/producto/{{ prod.id }}" class="btn btn-success"></a></td>
+        </tr>
+      </tbody>
+
+    <p> entra en el else </p>
+  {% endif %}
+   </table> 
+
+{% endblock %}
+
+
+

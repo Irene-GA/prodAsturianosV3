@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+        <title>
+            {% block titulo %} Productos | Inicio    {% endblock %}
+        </title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/public/css/estilos.css"/>
+ 
+    </head>
+    <body>
+        <nav class="alert alert-secondary">
+            <a class="btn btn-dark" href="/">Inicio</a>
+            &nbsp;&nbsp;
+            <a class="btn btn-dark" href="/admin">Administración</a>
+            &nbsp;&nbsp;
+            {% if (session and session.usuario) %}
+                <a class="btn btn-dark" href="/auth/logout">Logout</a>
+            {% else %}
+                <a class="btn btn-dark" href="/auth/login">Login</a>
+            {% endif %}
+        </nav> 
+        
+        <div class="container">
+            {% block contenido %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
